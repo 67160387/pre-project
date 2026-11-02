@@ -1,0 +1,14 @@
+const express = require("express");
+const path = require("path");
+const { errorHandler, notFound } = require("./errors");
+const app = express();
+app.use(express.json());
+app.get("/health", (req, res) => res.json({ status: "ok", mode: "monolith" }));
+require("./docs")(app);
+app.use("/api/v1/games", require("./routes/games").router);
+app.use("/api/v1", require("./routes/catalog"));
+app.use("/api/v1", require("./routes/enrichment"));
+app.use(express.static(path.join(__dirname, "../frontend")));
+app.use(notFound);
+app.use(errorHandler);
+module.exports = app;

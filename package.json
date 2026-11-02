@@ -1,0 +1,47 @@
+{
+  "name": "boardgame-phase3",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node src/scripts/start-services.js",
+    "env:setup": "node src/scripts/setup-env.js",
+    "db:setup": "node src/scripts/setup-db.js",
+    "test": "jest --runInBand",
+    "test:coverage": "jest --runInBand --coverage --json --outputFile=src/reports/jest-results.json",
+    "verify": "node src/scripts/verify-live.js",
+    "postman:test": "node src/scripts/test-postman.js",
+    "start:monolith": "node src/index.js",
+    "auth:setup": "node src/scripts/setup-auth.js"
+  },
+  "dependencies": {
+    "dotenv": "16.6.1",
+    "express": "4.22.3",
+    "mysql2": "3.24.6",
+    "swagger-ui-express": "5.0.1",
+    "yaml": "2.9.1"
+  },
+  "devDependencies": {
+    "jest": "29.7.0",
+    "supertest": "7.3.1",
+    "newman": "6.2.3"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testMatch": [
+      "<rootDir>/src/tests/**/*.test.js"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/tests/**",
+      "!src/scripts/**",
+      "!src/coverage/**"
+    ],
+    "coverageDirectory": "src/coverage",
+    "cacheDirectory": "src/.cache/jest",
+    "transform": {},
+    "coverageReporters": [
+      "text",
+      "json-summary"
+    ]
+  }
+}

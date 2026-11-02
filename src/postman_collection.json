@@ -1,0 +1,1674 @@
+{
+  "info": {
+    "name": "Board Game Management API - actual recorded responses",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Requests and examples captured by verify-live.js against MySQL and gateway. Replayed and exported using Postman Newman."
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    },
+    {
+      "key": "runName",
+      "value": "Postman demo"
+    },
+    {
+      "key": "createdId",
+      "value": ""
+    },
+    {
+      "key": "username",
+      "value": "admin"
+    },
+    {
+      "key": "password",
+      "value": ""
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "if(pm.info.requestName==='Create game') pm.collectionVariables.set('runName','Postman '+Date.now());"
+        ]
+      }
+    }
+  ],
+  "item": [
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/auth/login",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"username\":\"{{username}}\",\"password\":\"{{password}}\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Login succeeds',()=>pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Gateway health",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/health"
+      },
+      "response": [
+        {
+          "name": "Captured live response 2026-10-31T18:52:19.081Z",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/health"
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "cache-control",
+              "value": "no-store"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "content-length",
+              "value": "32"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "date",
+              "value": "Sat, 31 Oct 2026 18:52:19 GMT"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"20-8tWL1KMudphh/FXnETqoa/W+wtQ\""
+            },
+            {
+              "key": "keep-alive",
+              "value": "timeout=5"
+            },
+            {
+              "key": "x-powered-by",
+              "value": "Express"
+            }
+          ],
+          "body": "{\"status\":\"ok\",\"mode\":\"gateway\"}"
+        }
+      ],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200',()=>pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "List games",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/v1/games"
+      },
+      "response": [
+        {
+          "name": "Captured live response 2026-10-31T18:52:19.089Z",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/v1/games"
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "cache-control",
+              "value": "no-store"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "content-length",
+              "value": "652"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "date",
+              "value": "Sat, 31 Oct 2026 18:52:19 GMT"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"28c-aqdLXhC2LhI66a72Fpnaq/9VYCc\""
+            },
+            {
+              "key": "keep-alive",
+              "value": "timeout=5"
+            },
+            {
+              "key": "x-powered-by",
+              "value": "Express"
+            }
+          ],
+          "body": "{\"data\":[{\"id\":1,\"name\":\"Catan\",\"minPlayers\":3,\"maxPlayers\":4,\"playingTimeMinutes\":90,\"publisherId\":1,\"publisher\":\"Catan Studio\",\"categoryId\":1,\"category\":\"Strategy\"},{\"id\":2,\"name\":\"Dobble\",\"minPlayers\":3,\"maxPlayers\":8,\"playingTimeMinutes\":15,\"publisherId\":1,\"publisher\":\"Catan Studio\",\"categoryId\":2,\"category\":\"Family\"},{\"id\":3,\"name\":\"Wingspan\",\"minPlayers\":1,\"maxPlayers\":5,\"playingTimeMinutes\":70,\"publisherId\":3,\"publisher\":\"Stonemaier Games\",\"categoryId\":3,\"category\":\"Engine Building\"},{\"id\":12,\"name\":\"F\",\"minPlayers\":2,\"maxPlayers\":4,\"playingTimeMinutes\":30,\"publisherId\":1,\"publisher\":\"Catan Studio\",\"categoryId\":1,\"category\":\"Strategy\"}]}"
+        }
+      ],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200',()=>pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Get games",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/v1/games/1"
+      },
+      "response": [
+        {
+          "name": "Captured live response 2026-10-31T18:52:19.095Z",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/v1/games/1"
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "cache-control",
+              "value": "no-store"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "content-length",
+              "value": "166"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "date",
+              "value": "Sat, 31 Oct 2026 18:52:19 GMT"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"a6-hnEsaP4xbOchxJZaSWap5cHUml8\""
+            },
+            {
+              "key": "keep-alive",
+              "value": "timeout=5"
+            },
+            {
+              "key": "x-powered-by",
+              "value": "Express"
+            }
+          ],
+          "body": "{\"data\":{\"id\":1,\"name\":\"Catan\",\"minPlayers\":3,\"maxPlayers\":4,\"playingTimeMinutes\":90,\"publisherId\":1,\"publisher\":\"Catan Studio\",\"categoryId\":1,\"category\":\"Strategy\"}}"
+        }
+      ],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200',()=>pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Missing games",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/v1/games/2147483647"
+      },
+      "response": [
+        {
+          "name": "Captured live response 2026-10-31T18:52:19.098Z",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/v1/games/2147483647"
+          },
+          "status": "Not Found",
+          "code": 404,
+          "header": [
+            {
+              "key": "cache-control",
+              "value": "no-store"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "content-length",
+              "value": "57"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "date",
+              "value": "Sat, 31 Oct 2026 18:52:19 GMT"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"39-8VugAch5YBZxNOdHtMSZEuz5F2A\""
+            },
+            {
+              "key": "keep-alive",
+              "value": "timeout=5"
+            },
+            {
+              "key": "x-powered-by",
+              "value": "Express"
+            }
+          ],
+          "body": "{\"error\":{\"code\":\"NOT_FOUND\",\"message\":\"Game not found\"}}"
+        }
+      ],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 404',()=>pm.response.to.have.status(404));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "List publishers",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/v1/publishers"
+      },
+      "response": [
+        {
+          "name": "Captured live response 2026-10-31T18:52:19.102Z",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/v1/publishers"
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "cache-control",
+              "value": "no-store"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "content-length",
+              "value": "173"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "date",
+              "value": "Sat, 31 Oct 2026 18:52:19 GMT"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"ad-zpqLn6KcAEoiZeYZXVP+azrf2f0\""
+            },
+            {
+              "key": "keep-alive",
+              "value": "timeout=5"
+            },
+            {
+              "key": "x-powered-by",
+              "value": "Express"
+            }
+          ],
+          "body": "{\"data\":[{\"id\":1,\"name\":\"Catan Studio\",\"country\":\"United States\"},{\"id\":2,\"name\":\"Asmodee\",\"country\":\"France\"},{\"id\":3,\"name\":\"Stonemaier Games\",\"country\":\"United States\"}]}"
+        }
+      ],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200',()=>pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Get publishers",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/v1/publishers/1"
+      },
+      "response": [
+        {
+          "name": "Captured live response 2026-10-31T18:52:19.105Z",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/v1/publishers/1"
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "cache-control",
+              "value": "no-store"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "content-length",
+              "value": "65"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "date",
+              "value": "Sat, 31 Oct 2026 18:52:19 GMT"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"41-0SKDy28h9f6C7dSl2rPRom9uIp8\""
+            },
+            {
+              "key": "keep-alive",
+              "value": "timeout=5"
+            },
+            {
+              "key": "x-powered-by",
+              "value": "Express"
+            }
+          ],
+          "body": "{\"data\":{\"id\":1,\"name\":\"Catan Studio\",\"country\":\"United States\"}}"
+        }
+      ],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200',()=>pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Missing publishers",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/v1/publishers/2147483647"
+      },
+      "response": [
+        {
+          "name": "Captured live response 2026-10-31T18:52:19.108Z",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/v1/publishers/2147483647"
+          },
+          "status": "Not Found",
+          "code": 404,
+          "header": [
+            {
+              "key": "cache-control",
+              "value": "no-store"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "content-length",
+              "value": "52"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "date",
+              "value": "Sat, 31 Oct 2026 18:52:19 GMT"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"34-RZx3/XeStm7/sUs57tZGZbDVzvo\""
+            },
+            {
+              "key": "keep-alive",
+              "value": "timeout=5"
+            },
+            {
+              "key": "x-powered-by",
+              "value": "Express"
+            }
+          ],
+          "body": "{\"error\":{\"code\":\"NOT_FOUND\",\"message\":\"Not found\"}}"
+        }
+      ],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 404',()=>pm.response.to.have.status(404));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "List categories",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/v1/categories"
+      },
+      "response": [
+        {
+          "name": "Captured live response 2026-10-31T18:52:19.111Z",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/v1/categories"
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "cache-control",
+              "value": "no-store"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "content-length",
+              "value": "242"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "date",
+              "value": "Sat, 31 Oct 2026 18:52:19 GMT"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"f2-2578Ki8kXJQur8krsC39rEhVJe4\""
+            },
+            {
+              "key": "keep-alive",
+              "value": "timeout=5"
+            },
+            {
+              "key": "x-powered-by",
+              "value": "Express"
+            }
+          ],
+          "body": "{\"data\":[{\"id\":1,\"name\":\"Strategy\",\"description\":\"Planning and decision making\"},{\"id\":2,\"name\":\"Family\",\"description\":\"Accessible games for families\"},{\"id\":3,\"name\":\"Engine Building\",\"description\":\"Build a system that improves over time\"}]}"
+        }
+      ],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200',()=>pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Get categories",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/v1/categories/1"
+      },
+      "response": [
+        {
+          "name": "Captured live response 2026-10-31T18:52:19.114Z",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/v1/categories/1"
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "cache-control",
+              "value": "no-store"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "content-length",
+              "value": "80"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "date",
+              "value": "Sat, 31 Oct 2026 18:52:19 GMT"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"50-IvNNrekUHnCqoXlpJbRS8zi7N1M\""
+            },
+            {
+              "key": "keep-alive",
+              "value": "timeout=5"
+            },
+            {
+              "key": "x-powered-by",
+              "value": "Express"
+            }
+          ],
+          "body": "{\"data\":{\"id\":1,\"name\":\"Strategy\",\"description\":\"Planning and decision making\"}}"
+        }
+      ],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200',()=>pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Missing categories",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/v1/categories/2147483647"
+      },
+      "response": [
+        {
+          "name": "Captured live response 2026-10-31T18:52:19.116Z",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/v1/categories/2147483647"
+          },
+          "status": "Not Found",
+          "code": 404,
+          "header": [
+            {
+              "key": "cache-control",
+              "value": "no-store"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "content-length",
+              "value": "52"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "date",
+              "value": "Sat, 31 Oct 2026 18:52:19 GMT"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"34-RZx3/XeStm7/sUs57tZGZbDVzvo\""
+            },
+            {
+              "key": "keep-alive",
+              "value": "timeout=5"
+            },
+            {
+              "key": "x-powered-by",
+              "value": "Express"
+            }
+          ],
+          "body": "{\"error\":{\"code\":\"NOT_FOUND\",\"message\":\"Not found\"}}"
+        }
+      ],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 404',()=>pm.response.to.have.status(404));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Create game",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/v1/games",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"{{runName}}\",\n  \"minPlayers\": 2,\n  \"maxPlayers\": 4,\n  \"playingTimeMinutes\": 30,\n  \"publisherId\": 1,\n  \"categoryId\": 1\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "name": "Captured live response 2026-10-31T18:52:19.139Z",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/v1/games",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"{{runName}}\",\n  \"minPlayers\": 2,\n  \"maxPlayers\": 4,\n  \"playingTimeMinutes\": 30,\n  \"publisherId\": 1,\n  \"categoryId\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "header": [
+            {
+              "key": "cache-control",
+              "value": "no-store"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "content-length",
+              "value": "139"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "date",
+              "value": "Sat, 31 Oct 2026 18:52:19 GMT"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"8b-6uSEy0chkzlaS+3DnDU4icD64IA\""
+            },
+            {
+              "key": "keep-alive",
+              "value": "timeout=5"
+            },
+            {
+              "key": "x-powered-by",
+              "value": "Express"
+            }
+          ],
+          "body": "{\"data\":{\"id\":42,\"name\":\"Verification 1793472739017\",\"minPlayers\":2,\"maxPlayers\":4,\"playingTimeMinutes\":30,\"publisherId\":1,\"categoryId\":1}}"
+        }
+      ],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 201',()=>pm.response.to.have.status(201));",
+              "pm.collectionVariables.set('createdId',pm.response.json().data.id);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Duplicate game",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/v1/games",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"{{runName}}\",\n  \"minPlayers\": 2,\n  \"maxPlayers\": 4,\n  \"playingTimeMinutes\": 30,\n  \"publisherId\": 1,\n  \"categoryId\": 1\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "name": "Captured live response 2026-10-31T18:52:19.143Z",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/v1/games",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"{{runName}}\",\n  \"minPlayers\": 2,\n  \"maxPlayers\": 4,\n  \"playingTimeMinutes\": 30,\n  \"publisherId\": 1,\n  \"categoryId\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Conflict",
+          "code": 409,
+          "header": [
+            {
+              "key": "cache-control",
+              "value": "no-store"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "content-length",
+              "value": "58"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "date",
+              "value": "Sat, 31 Oct 2026 18:52:19 GMT"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"3a-hTPc21R8g2KXbD4RPbWgW1acIp8\""
+            },
+            {
+              "key": "keep-alive",
+              "value": "timeout=5"
+            },
+            {
+              "key": "x-powered-by",
+              "value": "Express"
+            }
+          ],
+          "body": "{\"error\":{\"code\":\"CONFLICT\",\"message\":\"Duplicate record\"}}"
+        }
+      ],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 409',()=>pm.response.to.have.status(409));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Invalid foreign key",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/v1/games",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Verification 1793472739017\",\n  \"minPlayers\": 2,\n  \"maxPlayers\": 4,\n  \"playingTimeMinutes\": 30,\n  \"publisherId\": 2147483647,\n  \"categoryId\": 1\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "name": "Captured live response 2026-10-31T18:52:19.147Z",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/v1/games",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Verification 1793472739017\",\n  \"minPlayers\": 2,\n  \"maxPlayers\": 4,\n  \"playingTimeMinutes\": 30,\n  \"publisherId\": 2147483647,\n  \"categoryId\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "cache-control",
+              "value": "no-store"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "content-length",
+              "value": "87"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "date",
+              "value": "Sat, 31 Oct 2026 18:52:19 GMT"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"57-WYyx7TYB7dr97ZiyrllqI5c6jf8\""
+            },
+            {
+              "key": "keep-alive",
+              "value": "timeout=5"
+            },
+            {
+              "key": "x-powered-by",
+              "value": "Express"
+            }
+          ],
+          "body": "{\"error\":{\"code\":\"INVALID_REFERENCE\",\"message\":\"Publisher or category does not exist\"}}"
+        }
+      ],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 400',()=>pm.response.to.have.status(400));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Invalid player counts",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/v1/games",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Verification 1793472739017\",\n  \"minPlayers\": 2,\n  \"maxPlayers\": 1,\n  \"playingTimeMinutes\": 30,\n  \"publisherId\": 1,\n  \"categoryId\": 1\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "name": "Captured live response 2026-10-31T18:52:19.150Z",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/v1/games",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Verification 1793472739017\",\n  \"minPlayers\": 2,\n  \"maxPlayers\": 1,\n  \"playingTimeMinutes\": 30,\n  \"publisherId\": 1,\n  \"categoryId\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "cache-control",
+              "value": "no-store"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "content-length",
+              "value": "119"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "date",
+              "value": "Sat, 31 Oct 2026 18:52:19 GMT"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"77-vR0oVrMUfIzZI2VBUqShYozyPws\""
+            },
+            {
+              "key": "keep-alive",
+              "value": "timeout=5"
+            },
+            {
+              "key": "x-powered-by",
+              "value": "Express"
+            }
+          ],
+          "body": "{\"error\":{\"code\":\"VALIDATION_ERROR\",\"message\":\"Valid name, positive players/time and publisherId/categoryId required\"}}"
+        }
+      ],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 400',()=>pm.response.to.have.status(400));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Update game",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/v1/games/{{createdId}}",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Updated verification\",\n  \"minPlayers\": 2,\n  \"maxPlayers\": 4,\n  \"playingTimeMinutes\": 30,\n  \"publisherId\": 1,\n  \"categoryId\": 1\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "name": "Captured live response 2026-10-31T18:52:19.156Z",
+          "originalRequest": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/v1/games/{{createdId}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated verification\",\n  \"minPlayers\": 2,\n  \"maxPlayers\": 4,\n  \"playingTimeMinutes\": 30,\n  \"publisherId\": 1,\n  \"categoryId\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "cache-control",
+              "value": "no-store"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "content-length",
+              "value": "133"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "date",
+              "value": "Sat, 31 Oct 2026 18:52:19 GMT"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"85-4QMf2HawlNl/R+JB+7+F3tOzI8M\""
+            },
+            {
+              "key": "keep-alive",
+              "value": "timeout=5"
+            },
+            {
+              "key": "x-powered-by",
+              "value": "Express"
+            }
+          ],
+          "body": "{\"data\":{\"id\":42,\"name\":\"Updated verification\",\"minPlayers\":2,\"maxPlayers\":4,\"playingTimeMinutes\":30,\"publisherId\":1,\"categoryId\":1}}"
+        }
+      ],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200',()=>pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Read updated game",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/v1/games/{{createdId}}"
+      },
+      "response": [
+        {
+          "name": "Captured live response 2026-10-31T18:52:19.159Z",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/v1/games/{{createdId}}"
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "cache-control",
+              "value": "no-store"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "content-length",
+              "value": "182"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "date",
+              "value": "Sat, 31 Oct 2026 18:52:19 GMT"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"b6-R7lehiR1RxcqNKHvSETugxJhA3I\""
+            },
+            {
+              "key": "keep-alive",
+              "value": "timeout=5"
+            },
+            {
+              "key": "x-powered-by",
+              "value": "Express"
+            }
+          ],
+          "body": "{\"data\":{\"id\":42,\"name\":\"Updated verification\",\"minPlayers\":2,\"maxPlayers\":4,\"playingTimeMinutes\":30,\"publisherId\":1,\"publisher\":\"Catan Studio\",\"categoryId\":1,\"category\":\"Strategy\"}}"
+        }
+      ],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200',()=>pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Delete game",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/v1/games/{{createdId}}"
+      },
+      "response": [
+        {
+          "name": "Captured live response 2026-10-31T18:52:19.163Z",
+          "originalRequest": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/v1/games/{{createdId}}"
+          },
+          "status": "No Content",
+          "code": 204,
+          "header": [
+            {
+              "key": "cache-control",
+              "value": "no-store"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "date",
+              "value": "Sat, 31 Oct 2026 18:52:19 GMT"
+            },
+            {
+              "key": "keep-alive",
+              "value": "timeout=5"
+            },
+            {
+              "key": "x-powered-by",
+              "value": "Express"
+            }
+          ],
+          "body": ""
+        }
+      ],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 204',()=>pm.response.to.have.status(204));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Deleted game absent",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/v1/games/{{createdId}}"
+      },
+      "response": [
+        {
+          "name": "Captured live response 2026-10-31T18:52:19.166Z",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/v1/games/{{createdId}}"
+          },
+          "status": "Not Found",
+          "code": 404,
+          "header": [
+            {
+              "key": "cache-control",
+              "value": "no-store"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "content-length",
+              "value": "57"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "date",
+              "value": "Sat, 31 Oct 2026 18:52:19 GMT"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"39-8VugAch5YBZxNOdHtMSZEuz5F2A\""
+            },
+            {
+              "key": "keep-alive",
+              "value": "timeout=5"
+            },
+            {
+              "key": "x-powered-by",
+              "value": "Express"
+            }
+          ],
+          "body": "{\"error\":{\"code\":\"NOT_FOUND\",\"message\":\"Game not found\"}}"
+        }
+      ],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 404',()=>pm.response.to.have.status(404));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Wikipedia background",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/v1/games/1/background"
+      },
+      "response": [
+        {
+          "name": "Captured live response 2026-10-31T18:52:19.613Z",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/v1/games/1/background"
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "cache-control",
+              "value": "no-store"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "content-length",
+              "value": "909"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "date",
+              "value": "Sat, 31 Oct 2026 18:52:19 GMT"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"38d-kqQ60MpLNS9K1x9noxqK2DkE8UM\""
+            },
+            {
+              "key": "keep-alive",
+              "value": "timeout=5"
+            },
+            {
+              "key": "x-powered-by",
+              "value": "Express"
+            }
+          ],
+          "body": "{\"data\":{\"game\":{\"id\":1,\"name\":\"Catan\"},\"external\":{\"source\":\"wikipedia\",\"available\":true,\"summary\":\"Catan (), previously known as The Settlers of Catan or simply Settlers, is a multiplayer board game designed by Klaus Teuber. It was first published in 1995 in Germany by Franckh-Kosmos Verlag (Kosmos). Its release, The Settlers of Catan became one of the first Eurogames to achieve popularity outside Europe. As of 2020, more than 32 million boxed sets in 40 languages had been sold. The game and its many expansions are also published by Catan Studio, Filosofia, GP, Inc., 999 Games, (Káissa), and Devir.\\nIn the game, players take on the roles of settlers, each attempting to build and develop holdings on the island of Catan while trading and acquiring different resources. Players gain victory points as their settlements grow, and the first to reach a set number of points (typically 10) wins.\\n\\n\"}}}"
+        }
+      ],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200',()=>pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Invalid ID",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/v1/games/abc"
+      },
+      "response": [
+        {
+          "name": "Captured live response 2026-10-31T18:52:19.616Z",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/v1/games/abc"
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "cache-control",
+              "value": "no-store"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "content-length",
+              "value": "54"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "date",
+              "value": "Sat, 31 Oct 2026 18:52:19 GMT"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"36-4LrtesmjE70VO+YU8o5f0RonAKg\""
+            },
+            {
+              "key": "keep-alive",
+              "value": "timeout=5"
+            },
+            {
+              "key": "x-powered-by",
+              "value": "Express"
+            }
+          ],
+          "body": "{\"error\":{\"code\":\"INVALID_ID\",\"message\":\"Invalid ID\"}}"
+        }
+      ],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 400',()=>pm.response.to.have.status(400));"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

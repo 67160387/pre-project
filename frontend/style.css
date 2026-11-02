@@ -1,0 +1,136 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family:
+    Segoe UI,
+    Arial,
+    sans-serif;
+  margin: 0;
+  background: #f5f6f9;
+  color: #172033;
+}
+main {
+  max-width: 1100px;
+  margin: auto;
+  padding: 24px;
+}
+header {
+  background: #202e53;
+  color: white;
+  border-radius: 18px;
+  padding: 34px;
+  margin-bottom: 20px;
+}
+h1 {
+  margin: 8px 0;
+  font-size: 2.2rem;
+}
+.eyebrow {
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #bad7ff;
+}
+a {
+  color: #b5e5ff;
+}
+.row {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 20px;
+}
+.row > article,
+.row > aside {
+  background: white;
+  border-radius: 16px;
+  padding: 22px;
+  box-shadow: 0 6px 30px #26345c12;
+}
+h2 {
+  margin: 0 0 15px;
+}
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 12px;
+}
+.card {
+  background: #f6f8fc;
+  padding: 16px;
+  border: 1px solid #e5eaf4;
+  border-radius: 12px;
+}
+.card h3 {
+  margin: 0 0 7px;
+}
+.muted {
+  color: #58677e;
+  font-size: 14px;
+}
+label {
+  display: block;
+  margin: 12px 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+input,
+select {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #cfd6e4;
+  border-radius: 8px;
+  font: inherit;
+}
+button {
+  background: #3258b3;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 9px 15px;
+  cursor: pointer;
+}
+button:disabled {
+  opacity: 0.5;
+}
+#status,
+#formStatus {
+  min-height: 24px;
+}
+#status.error,
+#formStatus.error {
+  color: #b52234;
+}
+@media (max-width: 720px) {
+  .row {
+    grid-template-columns: 1fr;
+  }
+  main {
+    padding: 12px;
+  }
+  header {
+    padding: 22px;
+  }
+}
+
+.card button {
+  margin: 4px 5px 0 0;
+}
+.error {
+  color: #b52234;
+}
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid #f4a300;
+  outline-offset: 3px;
+}
+[hidden] {
+  display: none !important;
+}
+
+.login-shell { max-width: 520px; padding-top: 9vh; }
+.login-panel { background: white; border-radius: 18px; padding: 28px; box-shadow: 0 6px 30px #26345c12; }
+.login-panel button { width: 100%; margin-top: 12px; min-height: 44px; }
+#loginStatus { min-height: 24px; }

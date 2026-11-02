@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Board Game Library</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <p class="eyebrow">Pno 8 • Board Game Management API</p>
+        <h1>🎲 Board Game Library</h1>
+        <p>ดูข้อมูลเกม เพิ่มและแก้ไขเกม และดูหมวดหมู่จากฐานข้อมูลจริง</p>
+        <nav><button id="logout" type="button">ออกจากระบบ</button></nav>
+      </header>
+      <section class="row">
+        <article>
+          <h2>บอร์ดเกมทั้งหมด</h2>
+          <button id="refresh" type="button">รีเฟรช</button>
+          <p id="status" role="status">Loading...</p>
+          <div id="games" class="cards"></div>
+        </article>
+        <aside>
+          <h2 id="formTitle">เพิ่มบอร์ดเกม</h2>
+          <form id="form">
+            <label
+              >ชื่อเกม<input
+                name="name"
+                required
+                maxlength="150"
+                placeholder="ชื่อบอร์ดเกม" /></label
+            ><label
+              >จำนวนผู้เล่นขั้นต่ำ<input
+                name="minPlayers"
+                type="number"
+                min="1"
+                value="2"
+                required /></label
+            ><label
+              >จำนวนผู้เล่นสูงสุด<input
+                name="maxPlayers"
+                type="number"
+                min="1"
+                value="4"
+                required /></label
+            ><label
+              >ระยะเวลา (นาที)<input
+                name="playingTimeMinutes"
+                type="number"
+                min="1"
+                value="30"
+                required /></label
+            ><label
+              >Publisher<select name="publisherId" required></select></label
+            ><label>Category<select name="categoryId" required></select></label
+            ><button type="submit" id="submit">บันทึกเกม</button
+            ><button id="cancel" type="button" hidden>ยกเลิกแก้ไข</button>
+            <p id="formStatus" role="status"></p>
+          </form>
+        </aside>
+      </section>
+    </main>
+    <script src="/app.js"></script>
+  </body>
+</html>

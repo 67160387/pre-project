@@ -1,0 +1,154 @@
+{
+  "testedAt": "2026-10-31T18:52:20.567Z",
+  "database": "MySQL 8.4.13",
+  "base": "http://127.0.0.1:3000",
+  "results": [
+    {
+      "name": "Gateway health",
+      "status": 200,
+      "durationMs": 5
+    },
+    {
+      "name": "List games",
+      "status": 200,
+      "durationMs": 6
+    },
+    {
+      "name": "Get games",
+      "status": 200,
+      "durationMs": 5
+    },
+    {
+      "name": "Missing games",
+      "status": 404,
+      "durationMs": 3
+    },
+    {
+      "name": "List publishers",
+      "status": 200,
+      "durationMs": 4
+    },
+    {
+      "name": "Get publishers",
+      "status": 200,
+      "durationMs": 3
+    },
+    {
+      "name": "Missing publishers",
+      "status": 404,
+      "durationMs": 3
+    },
+    {
+      "name": "List categories",
+      "status": 200,
+      "durationMs": 3
+    },
+    {
+      "name": "Get categories",
+      "status": 200,
+      "durationMs": 3
+    },
+    {
+      "name": "Missing categories",
+      "status": 404,
+      "durationMs": 2
+    },
+    {
+      "name": "Create game",
+      "status": 201,
+      "durationMs": 23
+    },
+    {
+      "name": "Duplicate game",
+      "status": 409,
+      "durationMs": 4
+    },
+    {
+      "name": "Invalid foreign key",
+      "status": 400,
+      "durationMs": 4
+    },
+    {
+      "name": "Invalid player counts",
+      "status": 400,
+      "durationMs": 3
+    },
+    {
+      "name": "Update game",
+      "status": 200,
+      "durationMs": 6
+    },
+    {
+      "name": "Read updated game",
+      "status": 200,
+      "durationMs": 3
+    },
+    {
+      "name": "Delete game",
+      "status": 204,
+      "durationMs": 4
+    },
+    {
+      "name": "Deleted game absent",
+      "status": 404,
+      "durationMs": 3
+    },
+    {
+      "name": "Wikipedia background",
+      "status": 200,
+      "durationMs": 445
+    },
+    {
+      "name": "Invalid ID",
+      "status": 400,
+      "durationMs": 2
+    },
+    {
+      "name": "/",
+      "status": 200
+    },
+    {
+      "name": "/api-docs/",
+      "status": 200
+    },
+    {
+      "name": "/openapi.yaml",
+      "status": 200
+    },
+    {
+      "name": "UNIQUE publisher",
+      "status": "PASS",
+      "mysqlError": "ER_DUP_ENTRY"
+    },
+    {
+      "name": "CHECK players",
+      "status": "PASS",
+      "mysqlError": "ER_CHECK_CONSTRAINT_VIOLATED"
+    },
+    {
+      "name": "FK missing publisher",
+      "status": "PASS",
+      "mysqlError": "ER_NO_REFERENCED_ROW_2"
+    },
+    {
+      "name": "RESTRICT referenced publisher",
+      "status": "PASS",
+      "mysqlError": "ER_ROW_IS_REFERENCED_2"
+    },
+    {
+      "name": "HTTP 503 retries then fallback",
+      "status": "PASS",
+      "attempts": 3
+    },
+    {
+      "name": "Real HTTP timeout and fallback",
+      "status": "PASS",
+      "attempts": 3,
+      "durationMs": 370
+    },
+    {
+      "name": "Actual unavailable service: gateway 503 and stays alive",
+      "status": "PASS"
+    }
+  ]
+}

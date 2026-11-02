@@ -1,0 +1,708 @@
+openapi: 3.0.3
+info:
+  title: Board Game Management API (Pno 8)
+  version: 1.2.0
+  description: Board game API with a single administrator login. Log in at /login
+    before using Swagger. Sessions expire after eight hours.
+servers:
+  - url: http://localhost:3000
+paths:
+  /api/v1/games:
+    get:
+      summary: List board games
+      operationId: get_api_v1_games
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Game"
+        "401":
+          description: Login required
+        "500":
+          description: Database/internal error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: Gateway cannot reach downstream service
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      summary: Create board game
+      operationId: post_api_v1_games
+      responses:
+        "201":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                properties:
+                  data:
+                    $ref: "#/components/schemas/GameWrite"
+        "400":
+          description: Invalid fields, ID, FK, or malformed JSON
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: Login required
+        "409":
+          description: Duplicate game for publisher
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "413":
+          description: Body exceeds 100 KB
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Database/internal error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: Gateway cannot reach downstream service
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GameInput"
+            example:
+              name: Demo Game
+              minPlayers: 2
+              maxPlayers: 4
+              playingTimeMinutes: 30
+              publisherId: 1
+              categoryId: 1
+  /api/v1/games/{id}:
+    get:
+      summary: Get board game
+      operationId: get_api_v1_games_id
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Game"
+        "400":
+          description: Invalid fields, ID, FK, or malformed JSON
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: Login required
+        "404":
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Database/internal error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: Gateway cannot reach downstream service
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 2147483647
+    put:
+      summary: Put board game
+      operationId: put_api_v1_games_id
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                properties:
+                  data:
+                    $ref: "#/components/schemas/GameWrite"
+        "400":
+          description: Invalid fields, ID, FK, or malformed JSON
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: Login required
+        "404":
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "409":
+          description: Duplicate game for publisher
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "413":
+          description: Body exceeds 100 KB
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Database/internal error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: Gateway cannot reach downstream service
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 2147483647
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GameInput"
+            example:
+              name: Demo Game
+              minPlayers: 2
+              maxPlayers: 4
+              playingTimeMinutes: 30
+              publisherId: 1
+              categoryId: 1
+    delete:
+      summary: Delete board game
+      operationId: delete_api_v1_games_id
+      responses:
+        "204":
+          description: Deleted; empty body
+        "400":
+          description: Invalid fields, ID, FK, or malformed JSON
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: Login required
+        "404":
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Database/internal error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: Gateway cannot reach downstream service
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 2147483647
+  /api/v1/publishers:
+    get:
+      summary: List publishers
+      operationId: get_api_v1_publishers
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Publisher"
+        "401":
+          description: Login required
+        "500":
+          description: Database/internal error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: Gateway cannot reach downstream service
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /api/v1/publishers/{id}:
+    get:
+      summary: Get Publisher
+      operationId: get_api_v1_publishers_id
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Publisher"
+        "400":
+          description: Invalid fields, ID, FK, or malformed JSON
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: Login required
+        "404":
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Database/internal error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: Gateway cannot reach downstream service
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 2147483647
+  /api/v1/categories:
+    get:
+      summary: List categories
+      operationId: get_api_v1_categories
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Category"
+        "401":
+          description: Login required
+        "500":
+          description: Database/internal error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: Gateway cannot reach downstream service
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /api/v1/categories/{id}:
+    get:
+      summary: Get Category
+      operationId: get_api_v1_categories_id
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Category"
+        "400":
+          description: Invalid fields, ID, FK, or malformed JSON
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: Login required
+        "404":
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Database/internal error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: Gateway cannot reach downstream service
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 2147483647
+  /api/v1/games/{id}/background:
+    get:
+      summary: Wikipedia background; fallback returns HTTP 200
+      operationId: get_api_v1_games_id_background
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Background"
+        "400":
+          description: Invalid fields, ID, FK, or malformed JSON
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: Login required
+        "404":
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Database/internal error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: Gateway cannot reach downstream service
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 2147483647
+  /health:
+    get:
+      summary: Process liveness; not database readiness
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - status
+                  - mode
+                properties:
+                  status:
+                    type: string
+                    enum:
+                      - ok
+                  mode:
+                    type: string
+                    enum:
+                      - monolith
+                      - gateway
+      security: []
+  /openapi.yaml:
+    get:
+      summary: API specification
+      responses:
+        "200":
+          description: OpenAPI YAML (JSON subset)
+          content:
+            text/yaml:
+              schema:
+                type: string
+        "401":
+          description: Login required
+  /api/auth/login:
+    post:
+      summary: Log in
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - username
+                - password
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+                  format: password
+      responses:
+        "200":
+          description: Authenticated; sets HttpOnly session cookie
+        "400":
+          description: Invalid input
+        "401":
+          description: Invalid credentials
+        "403":
+          description: Cross-site request
+        "429":
+          description: Too many attempts
+        "503":
+          description: Account not configured
+  /api/auth/logout:
+    post:
+      summary: Log out and invalidate session
+      responses:
+        "204":
+          description: Logged out
+  /api/auth/me:
+    get:
+      summary: Current account
+      responses:
+        "200":
+          description: Current username
+        "401":
+          description: Login required
+components:
+  schemas:
+    GameInput:
+      type: object
+      required:
+        - name
+        - minPlayers
+        - maxPlayers
+        - playingTimeMinutes
+        - publisherId
+        - categoryId
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 150
+        minPlayers:
+          type: integer
+          minimum: 1
+          maximum: 2147483647
+        maxPlayers:
+          type: integer
+          minimum: 1
+          maximum: 2147483647
+        playingTimeMinutes:
+          type: integer
+          minimum: 1
+          maximum: 2147483647
+        publisherId:
+          type: integer
+          minimum: 1
+          maximum: 2147483647
+        categoryId:
+          type: integer
+          minimum: 1
+          maximum: 2147483647
+      description: Trimmed name must be nonempty; maxPlayers >= minPlayers.
+    GameWrite:
+      allOf:
+        - $ref: "#/components/schemas/GameInput"
+        - type: object
+          required:
+            - id
+          properties:
+            id:
+              type: integer
+              minimum: 1
+              maximum: 2147483647
+    Game:
+      allOf:
+        - $ref: "#/components/schemas/GameWrite"
+        - type: object
+          required:
+            - publisher
+            - category
+          properties:
+            publisher:
+              type: string
+            category:
+              type: string
+    Publisher:
+      type: object
+      required:
+        - id
+        - name
+        - country
+      properties:
+        id:
+          type: integer
+          minimum: 1
+          maximum: 2147483647
+        name:
+          type: string
+        country:
+          type: string
+    Category:
+      type: object
+      required:
+        - id
+        - name
+        - description
+      properties:
+        id:
+          type: integer
+          minimum: 1
+          maximum: 2147483647
+        name:
+          type: string
+        description:
+          type: string
+          nullable: true
+    Error:
+      type: object
+      required:
+        - error
+      properties:
+        error:
+          type: object
+          required:
+            - code
+            - message
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+    Background:
+      type: object
+      required:
+        - game
+        - external
+      properties:
+        game:
+          type: object
+          required:
+            - id
+            - name
+          properties:
+            id:
+              type: integer
+              minimum: 1
+              maximum: 2147483647
+            name:
+              type: string
+        external:
+          type: object
+          required:
+            - source
+            - available
+            - summary
+          properties:
+            source:
+              type: string
+              enum:
+                - wikipedia
+                - fallback
+            available:
+              type: boolean
+            summary:
+              type: string
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: bg_session
+security:
+  - cookieAuth: []

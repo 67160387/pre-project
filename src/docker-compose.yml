@@ -1,0 +1,19 @@
+services:
+  db:
+    image: mysql:8.4
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:?Set DB_ROOT_PASSWORD in .env for Docker}
+      MYSQL_DATABASE: boardgame_db
+      MYSQL_USER: ${DB_USER:-boarduser}
+      MYSQL_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in .env}
+    ports:
+      - "127.0.0.1:${DB_PORT:-3307}:3306"
+    volumes:
+      - boardgame_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 15
+volumes:
+  boardgame_data:
